@@ -1,6 +1,7 @@
 import re
 import tweepy 
-from tweepy import OAuthHandler 
+from tweepy import OAuthHandler, Stream
+from tweepy.streaming import StreamListener
 from textblob import TextBlob 
 from secrets import *
 
@@ -14,3 +15,13 @@ except:
 
 
 
+class Listener(StreamListener):
+    def on_data(self, data):
+        print(data)
+        return True
+    
+    def on_error(self, status):
+        print(status)
+
+twitterStream = Stream(auth, Listener())
+twitterStream.filter(track=["Lockdown"])
