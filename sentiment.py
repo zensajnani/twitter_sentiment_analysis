@@ -14,6 +14,12 @@ class TwitterSentiment():
     #Tweet Count
     count = int(input("Number of tweets to be displayed: "))
 
+    #Initialise Count
+    positive_count = 0
+    negative_count = 0
+    neutral_count = 0
+
+
     #Authorisation
     try:
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -35,10 +41,13 @@ class TwitterSentiment():
     def tweet_sentiment(self, tweet):
         analysis = TextBlob(self.clean_tweet(tweet))
         if analysis.sentiment.polarity > 0: 
+            self.positive_count += 1
             return 'positive'
         elif analysis.sentiment.polarity == 0: 
+            self.neutral_count += 1
             return 'neutral'
         else: 
+            self.negative_count += 1
             return 'negative'
 
     #Create Pandas dataframe to store tweets and sentiment
@@ -47,6 +56,14 @@ class TwitterSentiment():
         df['Tweets'] = np.array([tweet.text for tweet in tweets])
         return df
         
+    def calculate_percentage(self, tweets):
+        positive_percent = (self.positive_count / self.count) * 100
+        negative_percent = (self.negative_count / self.count) * 100
+        neutral_percent = (self.neutral_count / self.count) * 100
+        print(f"\nPositive Tweets: {positive_percent}%")
+        print(f"Negative Tweets: {negative_percent}%")
+        print(f"Neutral Tweets: {neutral_percent}%\n")
+        
 
 if __name__ == "__main__":
     ts = TwitterSentiment()
@@ -54,3 +71,4 @@ if __name__ == "__main__":
     df = ts.create_data_frame(tweets)
     df['Sentiment'] = np.array([ts.tweet_sentiment(tweet) for tweet in df['Tweets']])
     print(df.head(ts.count))
+    ts.calculate_percentage(df['Tweets'])
