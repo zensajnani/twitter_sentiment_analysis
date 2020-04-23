@@ -9,10 +9,10 @@ from secrets import *
 class TwitterSentiment():
     
     #Tweet Query
-    query = "Lockdown"
+    query = input("Query term: ")
 
     #Tweet Count
-    count = 40
+    count = int(input("Number of tweets to be displayed: "))
 
     #Authorisation
     try:
