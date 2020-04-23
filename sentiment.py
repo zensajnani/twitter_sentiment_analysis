@@ -51,7 +51,6 @@ class TwitterSentiment():
 if __name__ == "__main__":
     ts = TwitterSentiment()
     tweets = ts.get_tweets()
-    ts.create_data_frame(tweets)
     df = ts.create_data_frame(tweets)
     df['Sentiment'] = np.array([ts.tweet_sentiment(tweet) for tweet in df['Tweets']])
     print(df.head(ts.count))
