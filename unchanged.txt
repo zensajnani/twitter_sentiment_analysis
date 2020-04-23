@@ -1,5 +1,0 @@
-This text remains unchanged in all branches
-
-
-fetched_tweets = self.api.search(q = query, count = count) 
-
