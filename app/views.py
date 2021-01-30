@@ -21,9 +21,9 @@ def result():
     tweets = ts.get_tweets()
     df = ts.create_data_frame(tweets)
     df['Sentiment'] = np.array([ts.tweet_sentiment(tweet) for tweet in df['Tweets']])
-    print(df.head(ts.count))
+    # print(df.head(ts.count))
     df_dict = df.to_dict()
-    print(df_dict)
+    # print(df_dict)
     percentages = ts.calculate_percentage(df['Tweets'])
 
     return {'result': df_dict, 'percentages': percentages}

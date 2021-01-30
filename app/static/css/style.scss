@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,200;1,300;1,400&display=swap");
+
+$primary: #1da1f2;
+$color1: #14171a;
+$color2: #657786;
+$white: #fff;
+$border-radius: 5px;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+header {
+  min-height: 70vh;
+  background-color: $primary;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  gap: 7em;
+  .intro {
+    color: white;
+    flex: 1;
+    font-size: 2rem;
+    h1 {
+      font-weight: 400;
+    }
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    flex: 1;
+    display: grid;
+
+    form {
+      color: white;
+      display: flex;
+      flex-direction: column;
+      label {
+        font-size: 1.5rem;
+        margin-bottom: 0.2rem;
+      }
+      input {
+        border: 0;
+        border-radius: $border-radius;
+        padding: 0.25rem 0.5rem;
+        margin-bottom: 0.5em;
+        font-size: 1.25rem;
+      }
+    }
+    .sentiment {
+      background: $white;
+      color: black;
+      font-size: 1.5rem;
+      padding: 1rem;
+      border-radius: $border-radius;
+      position: relative;
+      .loading {
+        position: absolute;
+      }
+      .display {
+        .title {
+          font-weight: 400;
+        }
+        span {
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+
+section.tweets {
+  padding: 10%;
+  #displayResult {
+    max-width: 100%;
+  }
+}
+
+button {
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  background-color: $color1;
+  color: $white;
+  border: 0;
+  border-radius: 7px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 786px) {
+  header {
+    flex-direction: column;
+    .right {
+      min-width: 100%;
+    }
+  }
+  section.tweets {
+    padding: 7% 1%;
+  }
+}
