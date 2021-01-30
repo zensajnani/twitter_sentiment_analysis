@@ -67,6 +67,11 @@ class TwitterSentiment():
         print(f"\nPositive Tweets: {positive_percent}%")
         print(f"Negative Tweets: {negative_percent}%")
         print(f"Neutral Tweets: {neutral_percent}%\n")
+        return {
+            'positive_percent': positive_percent,
+            'negative_percent': negative_percent,
+            'neutral_percent': neutral_percent,
+        }
         
 
 # if __name__ == "__main__":
