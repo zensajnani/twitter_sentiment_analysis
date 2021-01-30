@@ -69,10 +69,10 @@ class TwitterSentiment():
         print(f"Neutral Tweets: {neutral_percent}%\n")
         
 
-if __name__ == "__main__":
-    ts = TwitterSentiment()
-    tweets = ts.get_tweets()
-    df = ts.create_data_frame(tweets)
-    df['Sentiment'] = np.array([ts.tweet_sentiment(tweet) for tweet in df['Tweets']])
-    print(df.head(ts.count))
-    ts.calculate_percentage(df['Tweets'])
+# if __name__ == "__main__":
+#     ts = TwitterSentiment()
+#     tweets = ts.get_tweets()
+#     df = ts.create_data_frame(tweets)
+#     df['Sentiment'] = np.array([ts.tweet_sentiment(tweet) for tweet in df['Tweets']])
+#     print(df.head(ts.count))
+#     ts.calculate_percentage(df['Tweets'])
