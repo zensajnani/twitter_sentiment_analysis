@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH = /home/zenikwfn/sentiment.zensajnani.com
-    - /bin/cp -R app $DEPLOYPATH
+    - export DEPLOYPATH = /home/zenikwfn/twitter_sentiment
+    - /bin/cp test.txt $DEPLOYPATH

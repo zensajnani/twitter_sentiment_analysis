@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from tweepy import OAuthHandler
 from textblob import TextBlob 
-from secrets import *
+from .secrets import *
 
 class TwitterSentiment():
     

@@ -1,9 +1,9 @@
-
+from app import app
 import numpy as np
 from flask import Flask, render_template, request
-from sentiment import TwitterSentiment
+from .sentiment import TwitterSentiment
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -28,5 +28,5 @@ def result():
 
     return {'result': df_dict, 'percentages': percentages}
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
