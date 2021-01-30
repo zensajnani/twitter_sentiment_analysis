@@ -45,7 +45,6 @@ header {
     gap: 3em;
     flex: 1;
     display: grid;
-
     form {
       color: white;
       display: flex;
@@ -81,13 +80,17 @@ header {
         }
       }
     }
+    .message {
+      color: white;
+      display: none;
+    }
   }
 }
 
 section.tweets {
   padding: 10%;
   #displayResult {
-    max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -102,9 +105,79 @@ button {
   cursor: pointer;
 }
 
+/*footer*/
+footer {
+  text-align: center;
+  min-height: 15px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  bottom: 0;
+  font-size: 32px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/*copyright*/
+.copyright {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  a {
+    color: black;
+    font-weight: 600;
+  }
+}
+
+/*social media icons*/
+.social {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.social ul {
+  display: flex;
+  margin-top: 0px;
+  padding-left: 0px;
+  margin-bottom: 0px;
+}
+
+.social ul li {
+  list-style: none;
+  margin-right: 1rem;
+}
+
+.social ul li a img {
+  height: 1.5em;
+}
+
+.powered-by {
+  a {
+    color: initial;
+  }
+}
+
+// MEDIA QUERIES
+@media only screen and (max-width: 640px) {
+  body,
+  footer {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  body,
+  footer {
+    font-size: 16px;
+  }
+}
+
 @media only screen and (max-width: 786px) {
   header {
     flex-direction: column;
+    padding: 3rem 5%;
     .right {
       min-width: 100%;
     }

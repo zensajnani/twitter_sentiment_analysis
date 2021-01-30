@@ -24,23 +24,23 @@
                 <input type="number" name="tweet-count" id="tweetCount" class="tweet-count" placeholder="100" value=100 required>
                 <button type="submit" id="searchTweets">Search</button>
             </form>
-            <div class="sentiment hidden" id="sentiment">
-                <div class="loading hidden" id="loading">
-                    <h1>Loading...</h1>
+            <div>
+                <div class="sentiment hidden" id="sentiment">
+                    <div class="loading hidden" id="loading">
+                        <h1>Loading...</h1>
+                    </div>
+                    <div class="display hidden" id="display">
+                        <p class="title">Sentiment Analysis</p>
+                        <p id="positive">Positive: <span id="percent"></span>%</p>
+                        <p id="negative">Negative: <span id="percent"></span>%</p>
+                        <p id="neutral">Neutral: <span id="percent"></span>%</p>
+                    </div>
                 </div>
-                <div class="display hidden" id="display">
-                <p class="title">Sentiment Analysis</p>
-                <p id="positive">Positive: <span id="percent"></span>%</p>
-                <p id="negative">Negative: <span id="percent"></span>%</p>
-                <p id="neutral">Neutral: <span id="percent"></span>%</p>
-            </div>
+                <p class="message">Scroll down to see the tweets</p>
             </div>
         </div>
     </header>
     <section class="tweets" id="tweets">
-        <div id="message" class="message" style="display: none;">
-            <h1>Hello</h1>
-        </div>
         <table id="displayResult" class="display">
             <thead>
                 <tr>
@@ -50,25 +50,33 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Adding dummy data to set table margins -->
-                <tr>
-                    <td>0</td>
-                    <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil corporis pariatur harum consequuntur quo ab culpa quod, sapiente molestiae praesentium provident eaque labore facere doloribus blanditiis ipsam, quaerat animi sequi!</td>
-                    <td>neutral</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil corporis pariatur harum consequuntur quo ab culpa quod, sapiente molestiae praesentium provident eaque labore facere doloribus blanditiis ipsam, quaerat animi sequi!</td>
-                    <td>neutral</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil corporis pariatur harum consequuntur quo ab culpa quod, sapiente molestiae praesentium provident eaque labore facere doloribus blanditiis ipsam, quaerat animi sequi!</td>
-                    <td>neutral</td>
-                </tr>
             </tbody>
         </table>
     </section>
+    <footer>
+        <div class="copyright">
+            <div class="cpr-zs">
+                Copyright &copy;
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+                <a href="https://zensajnani.com" target="_blank"><b>Zen Sajnani</b></a>
+            </div>
+            <div class="line-separator">&#160|&#160</div>
+            <div class="powered-by">Powered by <a href="https://zeniqle.com"><b>Zeniqle</b></a></div>
+            <div class="line-separator">&#160|&#160</div>
+            <div><a href="mailto:zen@zensajnani.com" target="_blank">zen@zensajnani.com</a></div>
+            <div class="line-separator">&#160|&#160</div>
+            <div class="social">
+                <ul>
+                    <li><a href="https://www.linkedin.com/in/zensajnani/" target="_blank"><img src="../static/img/linkedin_icon.png" alt="LinkedIn Icon" /></a></li>
+                    <li><a href="mailto:zen@zensajnani.com" target="_blank"><img src="../static/img/gmail_icon.png" alt="Gmail Icon" /></a></li>
+                    <!-- <li class="zeniqle-logo"><a href="./index.html"><img src="../static/img/zeniqle.jpeg" alt="Zeniqle Logo" id="footlogo"></a> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
     <script>
         $(document).ready(function() {
             
@@ -76,20 +84,16 @@
             
             // DataTable to print Table in a better format
             var table = $('#displayResult').DataTable({
-                retrieve: true,
-                paging: true,
                 searching: false,
             });
             // AJAX call to the backend to get classified tweets
             $("#searchTweets").click(function(e) {
                 e.preventDefault();
-                $("#message").show()
-                $("#message h1").text("Loading...")
                 $("#displayResult tbody").html('')
                 $("#sentiment").removeClass("hidden")
                 $("#sentiment #loading").removeClass("hidden")
                 $("#sentiment #display").addClass("hidden")
-
+                
                 $.ajax({
                     //Send search term (query) and tweet count (tweetCount) to the backend
                     data: {
@@ -101,30 +105,30 @@
                     // If post request is successful, then GET data from backend to display on frontend
                     success: (data) => {
                         //If data returned, hide loading/error message and print data
-                        $("#message").hide()
                         console.log("Request successful")
                         console.log(data)
                         //Display sentiment percentages
                         $("#sentiment #loading").addClass("hidden")
                         $("#sentiment #display").removeClass("hidden")
+                        $(".intro.right.message").show()
                         $("#sentiment #positive #percent").text(data['percentages']['positive_percent'])
                         $("#sentiment #negative #percent").text(data['percentages']['negative_percent'])
                         $("#sentiment #neutral #percent").text(data['percentages']['neutral_percent'])
-
+                        
                         // Loop to print the result in a HTML table
                         for (var i = 0; i < $("#tweetCount").val(); i++) {
                             console.log(data['result']['Tweets'][i] + " " + data['result']['Sentiment'][i])
-                            // Display current element as HTML row
-                            var row = '<tr>' + '<td>' + (i+1) + '</td>' + '<td>' + data['result']['Tweets'][i] + '</td>' + '<td>' + data['result']['Sentiment'][i] + '</td>' + '</tr>'
+                            //If sentiment is negative, print red row
+                            // If sentiment is positive print green row
                             // Append the row to table
-                            $("#displayResult tbody").append(row)
+                            table.row.add([(i+1), data['result']['Tweets'][i], data['result']['Sentiment'][i]]).draw()
+                            // $("#displayResult tbody").append(row)
                         }
-                        
+                        table.columns.adjust().draw();
                     },
                     // If no data was returned from API
                     error: () => {
-                        $("#message").show()
-                        $("#message h1").text("There was an error :(")
+                        $("#sentiment #loading").text("There was an error :(")
                         console.log("ERROR")
                         console.log(data)
                     }
