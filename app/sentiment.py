@@ -9,10 +9,14 @@ from secrets import *
 class TwitterSentiment():
     
     #Tweet Query
-    query = input("Query term: ")
+    # query = input("Query term: ")
 
     #Tweet Count
-    count = int(input("Number of tweets to be displayed: "))
+    # count = int(input("Number of tweets to be displayed: "))
+
+    def __init__(self, query, count):
+        self.query = query
+        self.count = int(count)
 
     #Initialise Count
     positive_count = 0
