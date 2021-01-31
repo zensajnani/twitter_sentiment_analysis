@@ -61,6 +61,8 @@ class TwitterSentiment():
         return df
         
     def calculate_percentage(self, tweets):
+        # Count can not be more than 100
+        self.count = 100 if self.count > 100 else self.count 
         positive_percent = (self.positive_count / self.count) * 100
         negative_percent = (self.negative_count / self.count) * 100
         neutral_percent = (self.neutral_count / self.count) * 100

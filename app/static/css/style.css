@@ -16,9 +16,60 @@ body {
   visibility: hidden;
 }
 
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #14171a;
+  color: white;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+}
+
 header {
   min-height: 70vh;
   background-color: #1da1f2;
+  padding: 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+header .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,8 +81,10 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 5%;
   gap: 7em;
+  max-width: 1000px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 header .intro {
@@ -43,7 +96,7 @@ header .intro {
 }
 
 header .intro h1 {
-  font-weight: 400;
+  font-weight: 600;
 }
 
 header .right {
@@ -84,6 +137,12 @@ header .right form input {
   padding: 0.25rem 0.5rem;
   margin-bottom: 0.5em;
   font-size: 1.25rem;
+}
+
+header .right form p.max {
+  font-size: 1rem;
+  margin-top: -0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 header .right .sentiment {
@@ -146,7 +205,7 @@ footer {
           justify-content: center;
   position: relative;
   bottom: 0;
-  font-size: 32px;
+  font-size: 1.5rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -165,6 +224,10 @@ footer {
 
 .copyright a {
   color: black;
+  font-weight: 600;
+}
+
+.copyright b {
   font-weight: 600;
 }
 
@@ -214,12 +277,18 @@ footer {
 }
 
 @media only screen and (max-width: 786px) {
+  nav ul {
+    width: 100%;
+  }
   header {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
     padding: 3rem 5%;
+  }
+  header .intro {
+    font-size: 1.5rem;
   }
   header .right {
     min-width: 100%;
